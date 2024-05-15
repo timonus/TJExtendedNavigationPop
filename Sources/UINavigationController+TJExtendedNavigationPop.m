@@ -45,7 +45,7 @@ __attribute__((objc_direct_members))
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     // Starting a tap on bar button items when the nav controller is at root, then dragging out, then attempting to tap the nav bar button is broken due to this GR. Don't recognize unless we need to!
-    return (!_navigationController.interactivePopGestureRecognizer.delegate || [_navigationController.interactivePopGestureRecognizer.delegate gestureRecognizerShouldBegin:gestureRecognizer]) && _navigationController.viewControllers.count > 1;
+    return (!_navigationController.interactivePopGestureRecognizer.delegate || ([_navigationController.interactivePopGestureRecognizer.delegate respondsToSelector:@selector(gestureRecognizerShouldBegin:)] && [_navigationController.interactivePopGestureRecognizer.delegate gestureRecognizerShouldBegin:gestureRecognizer])) && _navigationController.viewControllers.count > 1;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
