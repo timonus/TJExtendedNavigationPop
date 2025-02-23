@@ -36,7 +36,7 @@ __attribute__((objc_direct_members))
                 forKey:str];
         
         // Trying to fix "flash" bug
-        // https://bit.ly/3Fa97cf
+        // https://tijo.link/kJ2Wo5
         navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     return self;
