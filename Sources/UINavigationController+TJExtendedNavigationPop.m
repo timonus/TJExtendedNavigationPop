@@ -65,6 +65,13 @@ __attribute__((objc_direct_members))
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+#if defined(__IPHONE_26_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_26_0
+        if (@available(iOS 26.0, *)) {
+            if (![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIDesignRequiresCompatibility"] boolValue]) {
+                return;
+            }
+        }
+#endif
 #if !defined(__IPHONE_14_0) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_14_0
         if (@available(iOS 14.0, *))
 #endif
@@ -85,6 +92,13 @@ __attribute__((objc_direct_members))
 
 - (void)tj_extendInteractivePopGestureRecognizer
 {
+#if defined(__IPHONE_26_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_26_0
+        if (@available(iOS 26.0, *)) {
+            if (![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIDesignRequiresCompatibility"] boolValue]) {
+                return;
+            }
+        }
+#endif
 #if !defined(__IPHONE_14_0) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_14_0
     if (@available(iOS 14.0, *))
 #endif
