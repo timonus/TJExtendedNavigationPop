@@ -57,6 +57,11 @@ __attribute__((objc_direct_members))
     return NO;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return !_navigationController.interactivePopGestureRecognizer.delegate || ([_navigationController.interactivePopGestureRecognizer.delegate respondsToSelector:@selector(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:)] && [_navigationController.interactivePopGestureRecognizer.delegate gestureRecognizer:gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:otherGestureRecognizer]);
+}
+
 @end
 
 @implementation UINavigationController (TJExtendedNavigationPop)
