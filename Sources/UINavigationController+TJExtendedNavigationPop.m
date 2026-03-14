@@ -68,11 +68,16 @@ __attribute__((objc_direct_members))
 
 + (void)tj_extendAllInteractivePopGestureRecognizers
 {
+    [self tj_extendAllInteractivePopGestureRecognizers:NO];
+}
+
++ (void)tj_extendAllInteractivePopGestureRecognizers:(BOOL)evenInLiquidGlass
+{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 #if defined(__IPHONE_26_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_26_0
         if (@available(iOS 26.0, *)) {
-            if (![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIDesignRequiresCompatibility"] boolValue]) {
+            if (!evenInLiquidGlass && ![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIDesignRequiresCompatibility"] boolValue]) {
                 return;
             }
         }
@@ -97,9 +102,14 @@ __attribute__((objc_direct_members))
 
 - (void)tj_extendInteractivePopGestureRecognizer
 {
+    [self tj_extendInteractivePopGestureRecognizer:NO];
+}
+
+- (void)tj_extendInteractivePopGestureRecognizer:(BOOL)evenInLiquidGlass;
+{
 #if defined(__IPHONE_26_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_26_0
         if (@available(iOS 26.0, *)) {
-            if (![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIDesignRequiresCompatibility"] boolValue]) {
+            if (!evenInLiquidGlass && ![[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIDesignRequiresCompatibility"] boolValue]) {
                 return;
             }
         }
@@ -124,7 +134,7 @@ __attribute__((objc_direct_members))
 - (void)tj_viewDidLoad
 {
     [self tj_viewDidLoad];
-    [self tj_extendInteractivePopGestureRecognizer];
+    [self tj_extendInteractivePopGestureRecognizer:YES];
 }
 
 @end

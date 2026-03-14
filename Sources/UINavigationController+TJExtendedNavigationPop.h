@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)tj_extendAllInteractivePopGestureRecognizers; // TODO: Make direct
 - (void)tj_extendInteractivePopGestureRecognizer __attribute__((objc_direct));
 
++ (void)tj_extendAllInteractivePopGestureRecognizers:(BOOL)evenInLiquidGlass;
+- (void)tj_extendInteractivePopGestureRecognizer:(BOOL)evenInLiquidGlass __attribute__((objc_direct));
+
 @end
 
 NS_ASSUME_NONNULL_END
